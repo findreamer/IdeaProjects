@@ -8,7 +8,7 @@
   <url>http://maven.apache.org</url>
 
   <properties>
-    <mysql.version>5.1.5</mysql.version>
+    <mysql.version>8.0.16</mysql.version>
     <apach.commons.version>3.4</apach.commons.version>
     <logback.version>1.2.10</logback.version>
     <slf4j.version>1.7.7</slf4j.version>

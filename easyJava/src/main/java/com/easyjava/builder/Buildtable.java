@@ -17,7 +17,6 @@ public class Buildtable {
         String url = PropertiesUtils.getString("db.url");
         String user = PropertiesUtils.getString("db.username");
         String password = PropertiesUtils.getString("db.password");
-
         try {
             Class.forName(driverName);
             conn = DriverManager.getConnection(url, user, password);
@@ -35,7 +34,7 @@ public class Buildtable {
             while (tableResult.next()) {
                 String tableName = tableResult.getString("name");
                 String comment = tableResult.getString("comment");
-                logger.info("tableName:(),comment:()", tableName, comment);
+                logger.info("tableName:{},comment:{}", tableName, comment);
             }
 
         } catch (Exception e) {
