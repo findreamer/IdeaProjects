@@ -1,6 +1,7 @@
 package com.easyjava.builder;
 
 import com.easyjava.bean.Constants;
+import com.easyjava.bean.FieldInfo;
 import com.easyjava.bean.TableInfo;
 import com.easyjava.utils.PropertiesUtils;
 import com.easyjava.utils.StringUtils;
@@ -14,8 +15,10 @@ import java.util.List;
 public class BuildTable {
   private static final Logger logger = LoggerFactory.getLogger(BuildTable.class);
   private static Connection conn = null;
-  //    获取到表信息
+  // 获取到表信息
   private static final String SQL_SHOW_TABLE_STATUS = "show table status";
+  private static final String SQL_SHOW_TABLE_FIELDS = "show full fields from %s";
+
 
   static {
     String driverName = PropertiesUtils.getString("db.driver.name");
@@ -51,11 +54,13 @@ public class BuildTable {
         beanName = processField(beanName, true);
 
         TableInfo tableInfo = new TableInfo();
+        // 1、读取表字段
         tableInfo.setTableName(tableName);
         tableInfo.setbeanName(beanName);
         tableInfo.setComment(comment);
-//        tableInfo.setBeanParamName();
-        logger.info("tableName:{},beanName:{}", tableName, beanName);
+        tableInfo.setBeanParamName(beanName + Constants.SUFFIX_BEAN_PARAM);
+        // logger.info("table:{},备注:{},JavaBean:{},JavaBeanQuery:{}", tableInfo.getTableName(), tableInfo.getComment(), tableInfo.getBeanName(), tableInfo.getBeanParamName());
+        readFieldInfo(tableInfo);
       }
 
     } catch (Exception e) {
@@ -100,5 +105,45 @@ public class BuildTable {
       sb.append(StringUtils.upperCaseFirstLetter(fields[i]));
     }
     return sb.toString();
+  }
+
+  private static List<FieldInfo> readFieldInfo(TableInfo tableInfo) {
+    PreparedStatement ps = null;
+    ResultSet fieldResult = null;
+
+    List<FieldInfo> fieldInfoList = new ArrayList();
+    try {
+      ps = conn.prepareStatement(String.format(SQL_SHOW_TABLE_FIELDS, tableInfo.getTableName()));
+      fieldResult = ps.executeQuery();
+      while (fieldResult.next()) {
+        String field = fieldResult.getString("field");
+        String type = fieldResult.getString("type");
+        String extra = fieldResult.getString("extra");
+        String comment = fieldResult.getString("comment");
+
+        logger.info("field:{},type:{},extra:{},", field, type, extra, comment);
+      }
+
+
+    } catch (Exception e) {
+      logger.error("读字段信息失败", e);
+    } finally {
+      if (fieldResult!=null) {
+        try {
+          fieldResult.close();
+        } catch (SQLException e) {
+          throw new RuntimeException(e);
+        }
+      }
+      if (ps!=null) {
+        try {
+          ps.close();
+        } catch (SQLException e) {
+          throw new RuntimeException(e);
+        }
+      }
+    }
+
+    return fieldInfoList;
   }
 }
