@@ -1,7 +1,5 @@
 package com.easyjava.bean;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 public class FieldInfo {
 
   /**
@@ -31,9 +29,6 @@ public class FieldInfo {
    */
   private Boolean isAutoincrement;
 
-  private Boolean haveDateTime;
-  private Boolean haveDate;
-  private Boolean haveBigDecimal;
 
   public String getFieldName() {
     return FieldName;
@@ -83,27 +78,4 @@ public class FieldInfo {
     this.javaType = javaType;
   }
 
-  public Boolean getHaveDateTime() {
-    return haveDateTime;
-  }
-
-  public void setHavaDateTime(Boolean havaDateTime) {
-    this.haveDateTime = havaDateTime;
-  }
-
-  public Boolean getHaveDate() {
-    return haveDate;
-  }
-
-  public void setHaveDate(Boolean haveDate) {
-    this.haveDate = haveDate;
-  }
-
-  public Boolean getHaveBigDecimal() {
-    return haveBigDecimal;
-  }
-
-  public void setHaveBigDecimal(Boolean haveBigDecimal) {
-    this.haveBigDecimal = haveBigDecimal;
-  }
 }
