@@ -5,6 +5,7 @@ import com.easyjava.bean.FieldInfo;
 import com.easyjava.bean.TableInfo;
 import com.easyjava.utils.PropertiesUtils;
 import com.easyjava.utils.StringUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -60,7 +61,7 @@ public class BuildTable {
         tableInfo.setComment(comment);
         tableInfo.setBeanParamName(beanName + Constants.SUFFIX_BEAN_PARAM);
         // logger.info("table:{},备注:{},JavaBean:{},JavaBeanQuery:{}", tableInfo.getTableName(), tableInfo.getComment(), tableInfo.getBeanName(), tableInfo.getBeanParamName());
-        readFieldInfo(tableInfo);
+        List<FieldInfo> fieldInfoList = readFieldInfo(tableInfo);
       }
 
     } catch (Exception e) {
@@ -121,7 +122,31 @@ public class BuildTable {
         String extra = fieldResult.getString("extra");
         String comment = fieldResult.getString("comment");
 
-        logger.info("field:{},type:{},extra:{},", field, type, extra, comment);
+        if (type.indexOf("(") > 0) {
+          type = type.substring(0, type.indexOf("("));
+        }
+
+        String propertyName = processField(field, false);
+        // logger.info("field:{},type:{},extra:{},comment:{}", field, type, extra, comment);
+        FieldInfo fieldInfo = new FieldInfo();
+        fieldInfo.setFieldName(field);
+        fieldInfo.setComment(comment);
+        fieldInfo.setSqlType(type);
+        fieldInfo.setIsAutoincrement("auto_increment".equalsIgnoreCase(extra) ? true:false);
+        fieldInfo.setPropertyName(propertyName);
+        fieldInfo.setJavaType(processJavaType(type));
+        logger.info("javaType:{}", processJavaType(type));
+        // fieldInfoList.add(fieldInfo);
+
+        if (ArrayUtils.contains(Constants.SQL_DATE_TIME_TYPES, type)) {
+          fieldInfo.setHavaDateTime(true);
+        }
+        if (ArrayUtils.contains(Constants.SQL_DATE_TYPES, type)) {
+          fieldInfo.setHaveDate(true);
+        }
+        if (ArrayUtils.contains(Constants.SQL_DECIMAL_TYPE, type)) {
+          fieldInfo.setHaveBigDecimal(true);
+        }
       }
 
 
@@ -145,5 +170,22 @@ public class BuildTable {
     }
 
     return fieldInfoList;
+  }
+
+  private static String processJavaType(String type) {
+    if (ArrayUtils.contains(Constants.SQL_INTEGER_TYPE, type)) {
+      return "Integer";
+    } else if (ArrayUtils.contains(Constants.SQL_LONG_TYPE, type)) {
+      return "Long";
+    } else if (ArrayUtils.contains(Constants.SQL_STRING_TYPE, type)) {
+      return "String";
+    } else if (ArrayUtils.contains(Constants.SQL_DATE_TIME_TYPES, type) || ArrayUtils.contains(Constants.SQL_DATE_TYPES, type)) {
+      return "Date";
+    } else if (ArrayUtils.contains(Constants.SQL_DECIMAL_TYPE, type)) {
+      return "BigDecimal";
+    } else {
+      throw new RuntimeException("无法识别的类型:" + type);
+    }
+
   }
 }

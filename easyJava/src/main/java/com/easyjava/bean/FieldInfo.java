@@ -1,74 +1,109 @@
 package com.easyjava.bean;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 public class FieldInfo {
 
-    /**
-     * 字段名称
-     */
-    private String FieldName;
+  /**
+   * 字段名称
+   */
+  private String FieldName;
 
-    /**
-     * bean 属性名称
-     */
-    private String propertyName;
+  /**
+   * bean 属性名称
+   */
+  private String propertyName;
 
-    private String sqlType;
+  private String sqlType;
 
-    /**
-     * 字段类型
-     */
-    private String javaType;
+  /**
+   * 字段类型
+   */
+  private String javaType;
 
-    /**
-     * 字段备注
-     */
-    private String comment;
+  /**
+   * 字段备注
+   */
+  private String comment;
 
-    /**
-     * 是否是自增长
-     */
-    private Boolean isAutoincrement;
+  /**
+   * 是否是自增长
+   */
+  private Boolean isAutoincrement;
 
-    public String getFieldName() {
-        return FieldName;
-    }
+  private Boolean haveDateTime;
+  private Boolean haveDate;
+  private Boolean haveBigDecimal;
 
-    public void setFieldName(String fielName) {
-        this.FieldName = fielName;
-    }
+  public String getFieldName() {
+    return FieldName;
+  }
 
-    public String getPropertyName() {
-        return propertyName;
-    }
-    public void setPropertyName(String propertyName) {
-        this.propertyName = propertyName;
-    }
+  public void setFieldName(String fielName) {
+    this.FieldName = fielName;
+  }
 
-    public String getComment() {
-        return comment;
-    }
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
+  public String getPropertyName() {
+    return propertyName;
+  }
 
-    public Boolean getIsAutoincrement() {
-        return isAutoincrement;
-    }
-    public void setIsAutoincrement(Boolean isAutoincrement) {
-        this.isAutoincrement = isAutoincrement;
-    }
+  public void setPropertyName(String propertyName) {
+    this.propertyName = propertyName;
+  }
 
-    public String getSqlType() {
-        return sqlType;
-    }
-    public void setSqlType(String sqlType) {
-        this.sqlType = sqlType;
-    }
+  public String getComment() {
+    return comment;
+  }
 
-    public String getJavaType() {
-        return javaType;
-    }
-    public void setJavaType(String javaType) {
-        this.javaType = javaType;
-    }
+  public void setComment(String comment) {
+    this.comment = comment;
+  }
+
+  public Boolean getIsAutoincrement() {
+    return isAutoincrement;
+  }
+
+  public void setIsAutoincrement(Boolean isAutoincrement) {
+    this.isAutoincrement = isAutoincrement;
+  }
+
+  public String getSqlType() {
+    return sqlType;
+  }
+
+  public void setSqlType(String sqlType) {
+    this.sqlType = sqlType;
+  }
+
+  public String getJavaType() {
+    return javaType;
+  }
+
+  public void setJavaType(String javaType) {
+    this.javaType = javaType;
+  }
+
+  public Boolean getHaveDateTime() {
+    return haveDateTime;
+  }
+
+  public void setHavaDateTime(Boolean havaDateTime) {
+    this.haveDateTime = havaDateTime;
+  }
+
+  public Boolean getHaveDate() {
+    return haveDate;
+  }
+
+  public void setHaveDate(Boolean haveDate) {
+    this.haveDate = haveDate;
+  }
+
+  public Boolean getHaveBigDecimal() {
+    return haveBigDecimal;
+  }
+
+  public void setHaveBigDecimal(Boolean haveBigDecimal) {
+    this.haveBigDecimal = haveBigDecimal;
+  }
 }
