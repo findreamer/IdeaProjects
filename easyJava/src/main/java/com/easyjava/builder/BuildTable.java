@@ -12,7 +12,9 @@ import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BuildTable {
   private static final Logger logger = LoggerFactory.getLogger(BuildTable.class);
@@ -193,6 +195,10 @@ public class BuildTable {
     PreparedStatement ps = null;
     ResultSet fieldResult = null;
 
+    Map<String, FieldInfo> tempMap = new HashMap();
+    for (FieldInfo fieldInfo : tableInfo.getFieldList()) {
+      tempMap.put(fieldInfo.getFieldName(), fieldInfo);
+    }
     try {
       ps = conn.prepareStatement(String.format(SQL_SHOW_TABLE_INDEX, tableInfo.getTableName()));
       fieldResult = ps.executeQuery();
@@ -208,11 +214,7 @@ public class BuildTable {
 
         List<FieldInfo> keyFieldList = tableInfo.getKeyIdexMap().computeIfAbsent(keyName, k -> new ArrayList<FieldInfo>());
 
-        for (FieldInfo fieldInfo : tableInfo.getFieldList()) {
-          if (fieldInfo.getFieldName().equals(columnName)) {
-            keyFieldList.add(fieldInfo);
-          }
-        }
+        keyFieldList.add(tempMap.get(columnName));
       }
 
 
