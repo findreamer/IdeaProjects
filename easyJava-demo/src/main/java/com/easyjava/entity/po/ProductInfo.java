@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.math.BigDecimal;
 
 /**
@@ -21,6 +22,7 @@ public class ProductInfo implements Serializable {
 	/**
 	 * 公司ID
 	 */
+	@JsonIgnore
 	private String companyId;
 
 	/**
@@ -70,6 +72,7 @@ public class ProductInfo implements Serializable {
 	/**
 	 * 状态
 	 */
+	@JsonIgnore
 	private Integer status;
 
 }
