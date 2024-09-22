@@ -2,166 +2,198 @@ package com.easyjava.entity.po;
 
 import java.io.Serializable;
 import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.math.BigDecimal;
 
 /**
  * @Description: 产品信息表
+ *
  * @auther: 钱多多
- * @date: 2024/09/18
+ * @date: 2024/09/22
  */
 public class ProductInfo implements Serializable {
-  /**
-   * 自增ID
-   */
-  private Integer id;
+	/**
+	 * 自增ID
+	 */
+	private Integer id;
 
-  /**
-   * 公司ID
-   */
-  @JsonIgnore
-  private String companyId;
+	/**
+	 * 公司ID
+	 */
+	@JsonIgnore
+	private String companyId;
 
-  /**
-   * 商品编号
-   */
-  private String code;
+	/**
+	 * 商品编号
+	 */
+	private String code;
 
-  /**
-   * 商品名称
-   */
-  private String productName;
+	/**
+	 * 商品名称
+	 */
+	private String productName;
 
-  /**
-   * 价格
-   */
-  private BigDecimal proce;
+	/**
+	 * 价格
+	 */
+	private BigDecimal proce;
 
-  /**
-   * sku类型
-   */
-  private Integer skuType;
+	/**
+	 * sku类型
+	 */
+	private Integer skuType;
 
-  /**
-   * 颜色类型
-   */
-  private Integer colorType;
+	/**
+	 * 颜色类型
+	 */
+	private Integer colorType;
 
-  /**
-   * 创建时间
-   */
-  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-  private Date createTime;
+	/**
+	 * 创建时间
+	 */
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private Date createTime;
 
-  /**
-   * 创建日期
-   */
-  @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
-  @DateTimeFormat(pattern = "yyyy-MM-dd")
-  private Date createDate;
+	/**
+	 * 创建日期
+	 */
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date createDate;
 
-  /**
-   * 库存
-   */
-  private Long stock;
+	/**
+	 * 库存
+	 */
+	private Long stock;
 
-  /**
-   * 状态
-   */
-  @JsonIgnore
-  private Integer status;
+	/**
+	 * 状态
+	 */
+	@JsonIgnore
+	private Integer status;
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-  public Integer getId() {
-    return this.id;
-  }
+	public Integer getId() {
+		return this.id;
+	}
 
-  public void setCompanyId(String companyId) {
-    this.companyId = companyId;
-  }
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
 
-  public String getCompanyId() {
-    return this.companyId;
-  }
+	public String getCompanyId() {
+		return this.companyId;
+	}
 
-  public void setCode(String code) {
-    this.code = code;
-  }
+	public void setCode(String code) {
+		this.code = code;
+	}
 
-  public String getCode() {
-    return this.code;
-  }
+	public String getCode() {
+		return this.code;
+	}
 
-  public void setProductName(String productName) {
-    this.productName = productName;
-  }
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
 
-  public String getProductName() {
-    return this.productName;
-  }
+	public String getProductName() {
+		return this.productName;
+	}
 
-  public void setProce(BigDecimal proce) {
-    this.proce = proce;
-  }
+	public void setProce(BigDecimal proce) {
+		this.proce = proce;
+	}
 
-  public BigDecimal getProce() {
-    return this.proce;
-  }
+	public BigDecimal getProce() {
+		return this.proce;
+	}
 
-  public void setSkuType(Integer skuType) {
-    this.skuType = skuType;
-  }
+	public void setSkuType(Integer skuType) {
+		this.skuType = skuType;
+	}
 
-  public Integer getSkuType() {
-    return this.skuType;
-  }
+	public Integer getSkuType() {
+		return this.skuType;
+	}
 
-  public void setColorType(Integer colorType) {
-    this.colorType = colorType;
-  }
+	public void setColorType(Integer colorType) {
+		this.colorType = colorType;
+	}
 
-  public Integer getColorType() {
-    return this.colorType;
-  }
+	public Integer getColorType() {
+		return this.colorType;
+	}
 
-  public void setCreateTime(Date createTime) {
-    this.createTime = createTime;
-  }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
-  public Date getCreateTime() {
-    return this.createTime;
-  }
+	public Date getCreateTime() {
+		return this.createTime;
+	}
 
-  public void setCreateDate(Date createDate) {
-    this.createDate = createDate;
-  }
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
 
-  public Date getCreateDate() {
-    return this.createDate;
-  }
+	public Date getCreateDate() {
+		return this.createDate;
+	}
 
-  public void setStock(Long stock) {
-    this.stock = stock;
-  }
+	public void setStock(Long stock) {
+		this.stock = stock;
+	}
 
-  public Long getStock() {
-    return this.stock;
-  }
+	public Long getStock() {
+		return this.stock;
+	}
 
-  public void setStatus(Integer status) {
-    this.status = status;
-  }
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 
-  public Integer getStatus() {
-    return this.status;
-  }
+	public Integer getStatus() {
+		return this.status;
+	}
 
-}
+	@Override
+	public String toString() {
+		return null;
+	}	@Override
+	public String toString() {
+		return null;
+	}	@Override
+	public String toString() {
+		return null;
+	}	@Override
+	public String toString() {
+		return null;
+	}	@Override
+	public String toString() {
+		return null;
+	}	@Override
+	public String toString() {
+		return null;
+	}	@Override
+	public String toString() {
+		return null;
+	}	@Override
+	public String toString() {
+		return null;
+	}	@Override
+	public String toString() {
+		return null;
+	}	@Override
+	public String toString() {
+		return null;
+	}	@Override
+	public String toString() {
+		return null;
+	}}

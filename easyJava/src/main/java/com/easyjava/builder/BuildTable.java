@@ -67,6 +67,8 @@ public class BuildTable {
         readFieldInfo(tableInfo);
 
         getKeyIndexInfo(tableInfo);
+
+        tableInfoList.add(tableInfo);
         logger.info("tableInfo:{}", JsonUtils.convertObj2Json(tableInfo));
 
       }
@@ -143,12 +145,18 @@ public class BuildTable {
         fieldInfo.setIsAutoincrement("auto_increment".equalsIgnoreCase(extra) ? true:false);
         fieldInfo.setPropertyName(propertyName);
         fieldInfo.setJavaType(processJavaType(type));
-        logger.info("javaType:{}", processJavaType(type));
+        // logger.info("javaType:{}", type);
         fieldInfoList.add(fieldInfo);
 
-        tableInfo.setHavaDateTime(ArrayUtils.contains(Constants.SQL_DATE_TIME_TYPES, type));
-        tableInfo.setHaveDate(ArrayUtils.contains(Constants.SQL_DATE_TYPES, type));
-        tableInfo.setHaveBigDecimal(ArrayUtils.contains(Constants.SQL_DECIMAL_TYPE, type));
+        if (ArrayUtils.contains(Constants.SQL_DATE_TIME_TYPES, type)) {
+          tableInfo.setHavaDateTime(true);
+        }
+        if (ArrayUtils.contains(Constants.SQL_DATE_TYPES, type)) {
+          tableInfo.setHaveDate(true);
+        }
+        if (ArrayUtils.contains(Constants.SQL_DECIMAL_TYPE, type)) {
+          tableInfo.setHaveBigDecimal(true);
+        }
       }
 
       tableInfo.setFieldList(fieldInfoList);
@@ -206,7 +214,7 @@ public class BuildTable {
         String keyName = fieldResult.getString("key_name");
         int nonUnique = fieldResult.getInt("non_unique");
         String columnName = fieldResult.getString("column_name");
-        logger.info("keyName:{},nonUnique:{},columnName:{}", keyName, nonUnique, columnName);
+        // logger.info("keyName:{},nonUnique:{},columnName:{}", keyName, nonUnique, columnName);
 
         if (nonUnique==1) {
           continue;

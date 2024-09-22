@@ -38,17 +38,17 @@ public class TableInfo {
   /**
    * 是否有date类型
    */
-  private Boolean haveDate;
+  private Boolean haveDate = false;
 
   /**
    * 是否有datetime类型
    */
-  private Boolean haveDateTime;
+  private Boolean haveDateTime = false;
 
   /**
    * 是否有 bigdecimal 类型
    */
-  private Boolean haveBigDecimal;
+  private Boolean haveBigDecimal = false;
 
   public String getTableName() {
     return tableName;
