@@ -5,6 +5,8 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
+import com.easyjava.enums.DateTimePatternEnum;
+import com.easyjava.utils.DateUtils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.math.BigDecimal;
@@ -12,7 +14,7 @@ import java.math.BigDecimal;
 /**
  * @Description: 产品信息表
  * @auther: 钱多多
- * @date: 2024/10/20
+ * @date: 2024/11/03
  */
 public class ProductInfo implements Serializable {
   /**
@@ -166,12 +168,13 @@ public class ProductInfo implements Serializable {
 
   @Override
   public String toString() {
-    return "自增ID: " + (id==null ? "空":id) + ", " + "公司ID: " + (companyId==null ? "空":companyId) + "," + "商品编号: " + (code==null ? "空":code) + "," + "商品名称: " + (productName==null ? "空":productName) + "," + "价格: " + (proce==null ? "空":proce) + "," + "sku类型: " + (skuType==null ? "空":skuType) + "," + "颜色类型: " + (colorType==null ? "空":colorType) + "," + "创建时间: " + (createTime==null ? "空":createTime) + "," + "创建日期: " + (createDate==null ? "空":createDate) + "," + "库存: " + (stock==null ? "空":stock) + "," + "状态: " + (status==null ? "空":status);
+    return "自增ID: " + (id==null ? "空":id) + ", " + "公司ID: " + (companyId==null ? "空":companyId) + ", " + "商品编号: " + (code==null ? "空":code) + ", " + "商品名称: " + (productName==null ? "空":productName) + ", " + "价格: " + (proce==null ? "空":proce) + ", " + "sku类型: " + (skuType==null ? "空":skuType) + ", " + "颜色类型: " + (colorType==null ? "空":colorType) + ", " + "创建时间: " + (createTime==null ? "空":DateUtils.format(createTime, DateTimePatternEnum.YYYY_MM_DD_HH_MM_SS.getPattern())) + ", " + "创建日期: " + (createDate==null ? "空":DateUtils.format(createDate, DateTimePatternEnum.YYYY_MM_DD.getPattern())) + ", " + "库存: " + (stock==null ? "空":stock) + ", " + "状态: " + (status==null ? "空":status);
   }
 
   public static void main(String[] args) {
     ProductInfo productInfo = new ProductInfo();
+    productInfo.setCreateDate(new Date());
+    productInfo.setCreateTime(new Date());
     System.out.println(productInfo);
   }
 }
-
